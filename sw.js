@@ -1,30 +1,25 @@
-/* Levántate · v4.0 · Mantener en sincronía CACHE_NAME con el lanzamiento. */
-const CACHE_NAME = 'levantate-v4-2026-11-07';
-const CORE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
-self.addEventListener('install',event=>{
-  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE.map(file=>new Request(file,{cache:'reload'})))));
-  // La nueva versión espera hasta que se confirme desde la app.
-});
-self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting()});
-self.addEventListener('activate',event=>{
-  event.waitUntil((async()=>{
-    const keys=await caches.keys();
-    await Promise.all(keys.filter(key=>key.startsWith('levantate-')&&key!==CACHE_NAME).map(key=>caches.delete(key)));
-    await self.clients.claim();
-  })());
-});
+/* Levántate 5.0 · Actualiza el nombre de caché en cada nueva publicación */
+const CACHE_NAME='levantate-v5-2026-11-07';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE.map(path=>new Request(path,{cache:'reload'})))))});
+self.addEventListener('message',event=>{if(event.data&&event.data.type==='SKIP_WAITING')self.skipWaiting()});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key.startsWith('levantate-')&&key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim()})())});
 self.addEventListener('fetch',event=>{
-  const request=event.request;
-  if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
-  if(request.mode==='navigate'){
-    event.respondWith((async()=>{
-      try{const response=await fetch(request,{cache:'no-store'});if(response.ok){const cache=await caches.open(CACHE_NAME);await cache.put('./index.html',response.clone());}return response}
-      catch(e){return (await caches.match('./index.html')) || (await caches.match('./')) || Response.error()}
-    })());
-    return;
-  }
-  event.respondWith((async()=>{
-    const cached=await caches.match(request);if(cached)return cached;
-    try{return await fetch(request)}catch(e){return Response.error()}
-  })());
+ const request=event.request;
+ if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
+ if(request.mode==='navigate'){
+  event.respondWith((async()=>{try{const fresh=await fetch(request,{cache:'no-store'});if(fresh.ok){const cache=await caches.open(CACHE_NAME);await cache.put('./index.html',fresh.clone())}return fresh}catch(err){return(await caches.match('./index.html'))||(await caches.match('./'))||Response.error()}})());return;
+ }
+ event.respondWith((async()=>{const cached=await caches.match(request);if(cached)return cached;try{return await fetch(request)}catch(err){return Response.error()}})());
+});
+// Preparado para Web Push futuro. GitHub Pages no es un servicio emisor.
+self.addEventListener('push',event=>{
+ let payload={};try{payload=event.data?.json()||{}}catch(e){payload={body:event.data?.text()||''}}
+ const title=typeof payload.title==='string'?payload.title:'Levántate · Una voz a tu lado';
+ const body=typeof payload.body==='string'?payload.body:'Tu historia todavía tiene capítulos hermosos por descubrir.';
+ event.waitUntil(self.registration.showNotification(title,{body,icon:'./icon-192.png',badge:'./icon-96.png',tag:payload.tag||'levantate-push',data:{url:self.registration.scope}}));
+});
+self.addEventListener('notificationclick',event=>{
+ event.notification.close();
+ event.waitUntil((async()=>{const windows=await clients.matchAll({type:'window',includeUncontrolled:true});for(const win of windows){if(win.url.startsWith(self.registration.scope)&&'focus' in win){await win.focus();return}}await clients.openWindow(self.registration.scope)})());
 });
