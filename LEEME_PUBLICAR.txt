@@ -1,14 +1,15 @@
-YUNO 8.3 — RETRATOS RENOVADOS DE LA PRINCESA Y LA COMPAÑERA
+YUNO 8.6 — Tu hora de llegada
 
-Esta actualización reemplaza los retratos de ambas acompañantes con las ilustraciones NUEVAS seleccionadas.
-- 6 expresiones para la Princesa
-- 6 expresiones para la Compañera
-- 6 retratos de Silan sin cambios
-- Siguen funcionando las frases, cambios automáticos y botón manual de expresión.
+NOVEDAD: La pestaña Ayuno muestra antes de iniciar la hora local en que se cumpliría la meta si empiezas ahora. Con un ayuno activo, muestra la hora prevista calculada con la hora de inicio guardada. El día se indica como hoy, mañana o fecha específica.
 
-PARA PUBLICAR EN GITHUB PAGES
-1. Abre Yuno en el teléfono y usa AJUSTES > RESPALDAR para guardar tu diario y registros.
-2. Descomprime este ZIP. Sube TODOS los archivos (no el ZIP) a la RAÍZ de github.com/CIzanami-crypto/levantate usando Add file > Upload files, reemplazando los antiguos. No subas tu respaldo personal.
-3. Pulsa Commit changes. Cuando GitHub Pages publique, abre Yuno y toca AJUSTES > BUSCAR ACTUALIZACIONES. Si no ves los retratos nuevos, cierra completamente la app y reábrela para cargar la caché actualizada.
+Cuando cambias la meta (12, 14, 16, 18, 20, 22 o 24 horas), ajustas la hora de inicio o reabres la app, la predicción se recalcula. En Ajustes, el campo de inicio también enseña la hora de finalización ANTES de guardarlo.
 
-Conserva la URL y el almacenamiento local de Yuno 8.2, incluidas las seis pestañas, XP, peso, diario, ayunos y caminatas.
+PARA ACTUALIZAR TU PWA EN GITHUB PAGES
+1. En Yuno, ve a Ajustes > Respaldar y guarda el JSON privado.
+2. Descomprime este ZIP y sube TODOS los archivos a la RAÍZ de tu repositorio github.com/CIzanami-crypto/levantate, reemplazando la versión anterior. NO subas el ZIP como archivo ni cambies la ruta.
+3. Confirma con Commit changes y espera a que GitHub Pages termine de publicar.
+4. Abre la app instalada y busca la actualización. No hace falta desinstalar.
+
+Se mantiene la clave de almacenamiento levantate_ayuno_v1. No se incluyen datos personales. No subas el respaldo JSON a GitHub.
+
+La hora prevista no es una recomendación de hacer un ayuno más largo; es un cálculo del horario de la meta que hayas elegido.
