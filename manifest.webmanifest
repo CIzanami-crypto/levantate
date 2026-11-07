@@ -1,0 +1,27 @@
+{
+  "id": "./",
+  "name": "Levántate · El camino del caballero",
+  "short_name": "Levántate",
+  "description": "Tu contador de ayunos y diario personal. 270 mensajes originales, sin anuncios, con modo sin conexión.",
+  "lang": "es-MX",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1020",
+  "theme_color": "#101526",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
