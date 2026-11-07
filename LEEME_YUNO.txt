@@ -1,0 +1,25 @@
+Yuno 6.0 — El camino del caballero
+
+Actualización de Levántate sin borrar datos. Sigue usando el mismo sitio GitHub Pages y el mismo almacenamiento local.
+
+CAMBIOS
+- Nueva marca Yuno y nuevo icono.
+- La Marcha: caminata en caminadora o exterior; cronómetro, pausa, distancia estimada y meta.
+- Entrenamiento de fuerza: series/repeticiones, registro y descansos de 30/60/90 segundos.
+- Hoja de personaje RPG, puntos de experiencia por entrenamientos, niveles y distinciones.
+- Conserva ayuno, diario, juramento, 486 frases, 135 mensajes de finalizar y avisos locales.
+- Datos anteriores migran automáticamente si actualizas en la misma URL.
+- El respaldo anterior Levántate (.json) también se puede restaurar en Yuno.
+
+PUBLICACIÓN
+1. En Yuno anterior, Ajustes > Respaldar. Descarga y guarda el .json EN PRIVADO.
+2. En github.com/CIzanami-crypto/levantate -> Add file -> Upload files, arrastra el contenido de este ZIP descomprimido (los archivos sueltos en la raíz).
+3. Haz Commit changes. Espera publicación en GitHub Pages; abre la PWA y usa Buscar actualizaciones.
+4. Si el icono antiguo sigue visible, recarga/reinicia la aplicación; Android puede conservar el icono anterior en caché.
+
+La app se seguirá alojando en https://cizanami-crypto.github.io/levantate/ mientras no se cambie el repositorio. Cambiar la ruta podría separar los datos guardados.
+
+IMPORTANTE
+El cronómetro se calcula con marcas de tiempo guardadas; no mide pasos ni distancia real por GPS. Si cierras la app mientras la marcha sigue iniciada, al volver se cuenta el tiempo transcurrido; usa Pausar cuando pares.
+La experiencia es simbólica y se consigue caminando y entrenando, nunca por extender el ayuno. Las notificaciones programadas con la app cerrada siguen requiriendo un servicio push externo.
+El respaldo incluye anotaciones personales: NUNCA lo subas al repositorio público.

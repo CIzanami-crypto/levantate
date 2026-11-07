@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "Levántate · El camino del caballero",
-  "short_name": "Levántate",
-  "description": "486 frases originales, contador de ayuno, diario privado y avisos opcionales. Sin anuncios.",
+  "name": "Yuno · El camino del caballero",
+  "short_name": "Yuno",
+  "description": "Ayuno, marcha, fuerza, diario y un caballero que sube de nivel. Más de 480 frases y voces aleatorias. Sin anuncios.",
   "lang": "es-MX",
   "start_url": "./",
   "scope": "./",

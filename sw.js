@@ -1,9 +1,9 @@
-/* Levántate 5.0 · Actualiza el nombre de caché en cada nueva publicación */
-const CACHE_NAME='levantate-v5-2026-11-07';
+/* Yuno 6.0 · Actualiza el nombre de caché en cada nueva publicación */
+const CACHE_NAME='yuno-v6-0-2026-11-07';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE.map(path=>new Request(path,{cache:'reload'})))))});
 self.addEventListener('message',event=>{if(event.data&&event.data.type==='SKIP_WAITING')self.skipWaiting()});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>key.startsWith('levantate-')&&key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim()})())});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>(key.startsWith('levantate-')||key.startsWith('yuno-'))&&key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim()})())});
 self.addEventListener('fetch',event=>{
  const request=event.request;
  if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;
@@ -15,9 +15,9 @@ self.addEventListener('fetch',event=>{
 // Preparado para Web Push futuro. GitHub Pages no es un servicio emisor.
 self.addEventListener('push',event=>{
  let payload={};try{payload=event.data?.json()||{}}catch(e){payload={body:event.data?.text()||''}}
- const title=typeof payload.title==='string'?payload.title:'Levántate · Una voz a tu lado';
+ const title=typeof payload.title==='string'?payload.title:'Yuno · Una voz a tu lado';
  const body=typeof payload.body==='string'?payload.body:'Tu historia todavía tiene capítulos hermosos por descubrir.';
- event.waitUntil(self.registration.showNotification(title,{body,icon:'./icon-192.png',badge:'./icon-96.png',tag:payload.tag||'levantate-push',data:{url:self.registration.scope}}));
+ event.waitUntil(self.registration.showNotification(title,{body,icon:'./icon-192.png',badge:'./icon-96.png',tag:payload.tag||'yuno-push',data:{url:self.registration.scope}}));
 });
 self.addEventListener('notificationclick',event=>{
  event.notification.close();
