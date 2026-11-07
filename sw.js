@@ -1,9 +1,9 @@
-/* Yuno 6.0 · Actualiza el nombre de caché en cada nueva publicación */
-const CACHE_NAME='yuno-v6-0-2026-11-07';
-const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png'];
+/* Yuno 8.3 · Actualiza el nombre de caché en cada nueva publicación */
+const CACHE_NAME='yuno-v8-3-retratos-nuevos-2026-11-07';
+const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./silan-serena.webp','./silan-alegre.webp','./silan-orgullosa.webp','./silan-protectora.webp','./silan-cariñosa.webp','./silan-juguetona.webp','./princesa-serena.webp','./princesa-alegre.webp','./princesa-sorprendida.webp','./princesa-pensativa.webp','./princesa-cariñosa.webp','./princesa-confiada.webp','./compa-radiante.webp','./compa-curiosa.webp','./compa-motivada.webp','./compa-serena.webp','./compa-cariñosa.webp','./compa-juguetona.webp'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE.map(path=>new Request(path,{cache:'reload'})))))});
 self.addEventListener('message',event=>{if(event.data&&event.data.type==='SKIP_WAITING')self.skipWaiting()});
-self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>(key.startsWith('levantate-')||key.startsWith('yuno-'))&&key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim()})())});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(key=>(key.startsWith('levantate-')||key.startsWith('yuno-')||key.startsWith('juno-'))&&key!==CACHE_NAME).map(key=>caches.delete(key)));await self.clients.claim()})())});
 self.addEventListener('fetch',event=>{
  const request=event.request;
  if(request.method!=='GET'||new URL(request.url).origin!==self.location.origin)return;

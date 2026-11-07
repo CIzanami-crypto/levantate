@@ -1,0 +1,14 @@
+YUNO 8.3 — RETRATOS RENOVADOS DE LA PRINCESA Y LA COMPAÑERA
+
+Esta actualización reemplaza los retratos de ambas acompañantes con las ilustraciones NUEVAS seleccionadas.
+- 6 expresiones para la Princesa
+- 6 expresiones para la Compañera
+- 6 retratos de Silan sin cambios
+- Siguen funcionando las frases, cambios automáticos y botón manual de expresión.
+
+PARA PUBLICAR EN GITHUB PAGES
+1. Abre Yuno en el teléfono y usa AJUSTES > RESPALDAR para guardar tu diario y registros.
+2. Descomprime este ZIP. Sube TODOS los archivos (no el ZIP) a la RAÍZ de github.com/CIzanami-crypto/levantate usando Add file > Upload files, reemplazando los antiguos. No subas tu respaldo personal.
+3. Pulsa Commit changes. Cuando GitHub Pages publique, abre Yuno y toca AJUSTES > BUSCAR ACTUALIZACIONES. Si no ves los retratos nuevos, cierra completamente la app y reábrela para cargar la caché actualizada.
+
+Conserva la URL y el almacenamiento local de Yuno 8.2, incluidas las seis pestañas, XP, peso, diario, ayunos y caminatas.
