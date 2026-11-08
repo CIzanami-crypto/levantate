@@ -1,5 +1,5 @@
-/* Yuno 8.10 · Actualiza el nombre de caché en cada nueva publicación */
-const CACHE_NAME='yuno-v8-10-nuevos-dialogos-2026-11-07';
+/* Yuno 8.15 · Actualiza el nombre de caché en cada nueva publicación */
+const CACHE_NAME='yuno-v8-15-sorpresas-2026-11-08';
 const CORE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./silan-serena.webp','./silan-alegre.webp','./silan-orgullosa.webp','./silan-protectora.webp','./silan-cariñosa.webp','./silan-juguetona.webp','./princesa-serena.webp','./princesa-alegre.webp','./princesa-sorprendida.webp','./princesa-pensativa.webp','./princesa-cariñosa.webp','./princesa-confiada.webp','./compa-radiante.webp','./compa-curiosa.webp','./compa-motivada.webp','./compa-serena.webp','./compa-cariñosa.webp','./compa-juguetona.webp'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE.map(path=>new Request(path,{cache:'reload'})))))});
 self.addEventListener('message',event=>{if(event.data&&event.data.type==='SKIP_WAITING')self.skipWaiting()});

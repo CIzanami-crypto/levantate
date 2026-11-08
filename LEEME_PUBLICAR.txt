@@ -1,7 +1,8 @@
-YUNO 8.10 — Palabras que abrazan
+Yuno 8.15 — Conversaciones vivas
 
-Actualización de textos exclusivamente: 30 conversaciones nuevas de Levántame; 6 por emoción con tres personajes. Nada de síntesis de voz.
+Primero respalda tus datos desde Ajustes → Respaldar.
+Descomprime la actualización ligera. En GitHub, en el mismo repositorio de siempre, reemplaza index.html y sw.js en la raíz y confirma los cambios.
+Después de que GitHub Pages publique la actualización, abre Yuno → Ajustes → Buscar actualizaciones.
 
-Mantiene Ayuno, Marcha, Héroe, Mente, Diario, Ajustes, los retratos, el registro de peso y todas las claves de almacenamiento.
-
-PUBLICAR: Respaldar desde Ajustes > descargar ZIP > descomprimir > subir todos los archivos del ZIP a la RAÍZ del repositorio en GitHub, sobrescribiendo los existentes > Commit changes > esperar Pages y actualizar Yuno. No subir tu respaldo personal a GitHub.
+Novedad: más escenas originales, cambios de expresión según el diálogo y selección sin revelar cuántos quedan.
+Se conservaron las seis pestañas y el mapa educativo. No subas tu respaldo personal a GitHub.
