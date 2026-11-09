@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#101526" />
 <meta name="description" content="Yuno: dos sendas, ayuno con XP de constancia, progreso de peso y compañeras de aventura. Sin anuncios." />
 <link rel="manifest" href="manifest.webmanifest" />
-<title>Yuno 8.15 · Historias de cada etapa</title>
+<title>Yuno 8.16 · Las huellas del caballero</title>
 <link rel="apple-touch-icon" href="./icon-192.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -278,6 +278,33 @@
 .meta-voice-switches button{border:1px solid #ffffff34;background:#ffffff08;color:#ccd8e7;padding:6px 9px;border-radius:11px;font-size:10px;font-weight:760}
 .meta-voice-switches button.on{border-color:#e8cba4;background:#efc69920;color:#ffe1b9}
 @media(max-width:375px){.meta-speech{grid-template-columns:36px 1fr;gap:8px}.meta-speech img{width:36px;height:47px}.meta-speech p{font-size:11.5px}.meta-actions button{min-width:100px;padding:10px 8px}}
+
+/* Yuno 8.16: pasos cotidianos y huellas del camino */
+.steps-card{background:linear-gradient(140deg,#1d3640,#18273c 52%,#282642);border:1px solid #a7e4c851}
+.steps-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.steps-heading .steps-tag{font-size:10px;color:var(--mint);font-weight:800;letter-spacing:1px;border:1px solid #a9e6ca55;border-radius:30px;padding:6px 9px;white-space:nowrap}
+.steps-number{font-size:46px;font-weight:820;letter-spacing:-2px;color:#f4eedc;font-variant-numeric:tabular-nums;line-height:1.1;margin:14px 0 0}
+.steps-number span{font-size:15px;color:#a9e6ca;letter-spacing:0;font-weight:500}
+.steps-progress{height:11px;border-radius:99px;overflow:hidden;background:#ffffff20;margin:16px 0 6px}
+.steps-progress>div{height:100%;width:0;background:linear-gradient(90deg,#4eac94,#d4f5c7);transition:width .3s;border-radius:99px}
+.steps-kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:13px 0 6px}
+.steps-kpis>div{border:1px solid #ffffff1e;border-radius:14px;background:#ffffff0b;text-align:center;padding:10px 4px}
+.steps-kpis strong{display:block;font-size:19px;color:#c9e9d9;font-variant-numeric:tabular-nums}
+.steps-kpis small{display:block;color:#acbccc;font-size:10px;margin-top:2px}
+.steps-quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.steps-quick button{padding:12px 3px;font-weight:800;background:#d0eee81c;border-color:#a0e5cf4b;color:#d5f9e9}
+.steps-entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.steps-entry-grid .field-label{font-size:11px;margin-top:10px}
+.steps-entry-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.steps-entry-actions button{font-size:12px;padding:12px 7px}
+.steps-daily-note{font-family:Georgia,serif;font-size:16px;line-height:1.5;border-left:3px solid var(--mint);background:#0d17265c;padding:11px 12px;margin:15px 0 0;color:#eaf1e7;border-radius:0 10px 10px 0}
+.steps-row{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #ffffff16;padding:10px 0;font-size:12px}
+.steps-row:first-child{border-top:0}
+.steps-row strong{color:#d3f2e4;font-size:14px}
+.steps-row button{border:0;background:none;color:#f7b4bf;padding:7px;font-size:11px}
+.steps-history{margin-top:10px;max-height:290px;overflow-y:auto}
+.steps-hero-summary{font-size:12px;color:#c7dacc;padding:12px 14px;border:1px solid #a9e6ca35;border-radius:13px;background:#a9e6ca09;margin:13px 0}
+@media(max-width:365px){.steps-entry-grid{grid-template-columns:1fr}.steps-number{font-size:40px}.steps-kpis strong{font-size:16px}}
 </style>
 </head>
 <body>
@@ -345,6 +372,23 @@
       <div class="march-quote"><small id="walkVoice">⚔ UNA VOZ EN EL CAMINO</small><div id="walkQuote">«No hace falta recorrer el mundo de una vez. Hoy escribe el primer paso».</div></div>
       <div style="text-align:right"><button type="button" class="secondary" id="walkAnother" style="margin-top:11px;font-size:12px">✧ Otra voz al azar</button></div>
     </div>
+
+    <div class="card steps-card" id="dailyStepsCard" aria-label="Registro de pasos del día">
+      <div class="steps-heading"><div><div class="eyebrow">✦ HUELLAS COTIDIANAS</div><h2 style="font:normal 24px Georgia,serif;margin:6px 0">Mis pasos del día</h2><p>La universidad, los traslados y las vueltas de la vida también cuentan en tu aventura.</p></div><span class="steps-tag">⚔ PASOS</span></div>
+      <div class="steps-number"><strong id="stepsToday" style="font:inherit">0</strong> <span>pasos registrados</span></div>
+      <div class="steps-progress" aria-label="Avance hacia tu referencia diaria"><div id="stepsProgress"></div></div>
+      <div class="small-info" id="stepsGoalRead">0 % de tu referencia de 10,000 pasos</div>
+      <div class="steps-kpis"><div><strong id="stepsWeek">0</strong><small>Últimos 7 días</small></div><div><strong id="stepsTotal">0</strong><small>Total registrado</small></div><div><strong id="stepsXp">0 XP</strong><small>Senda física</small></div></div>
+      <div class="steps-daily-note" id="stepsMotivation" aria-live="polite">«La caminata de un caballero también se escribe entre clases y pasillos».</div>
+      <div class="steps-quick" aria-label="Sumar pasos a la fecha elegida"><button type="button" class="secondary" data-add-steps="500">+500</button><button type="button" class="secondary" data-add-steps="1000">+1,000</button><button type="button" class="secondary" data-add-steps="2000">+2,000</button></div>
+      <div class="steps-entry-grid"><div><label class="field-label" for="stepsDate">Fecha del registro</label><input class="field" id="stepsDate" type="date"></div><div><label class="field-label" for="stepsInput">Pasos</label><input class="field" id="stepsInput" type="number" inputmode="numeric" min="0" max="100000" step="1" placeholder="Ej. 3800"></div></div>
+      <div class="steps-entry-actions"><button type="button" class="secondary" id="stepsAdd">＋ Sumar pasos</button><button type="button" class="secondary" id="stepsSet">✓ Fijar total del día</button></div>
+      <div class="small-info" style="margin-top:11px">Puedes sumar varias veces o introducir el total que muestre tu teléfono. Para corregir un día, utiliza «Fijar total». La referencia es ajustable, no una obligación.</div>
+      <label class="field-label" for="stepsDailyGoal">Referencia diaria de pasos</label>
+      <select class="field" id="stepsDailyGoal"><option value="3000">3,000 pasos</option><option value="5000">5,000 pasos</option><option value="7500">7,500 pasos</option><option value="10000">10,000 pasos</option><option value="12000">12,000 pasos</option><option value="15000">15,000 pasos</option></select>
+      <div class="hr"></div><h2>📜 Crónicas de tus pasos</h2><div class="steps-history" id="stepsHistory"></div>
+      <div class="small-info">Se guarda localmente y aparece en tu respaldo. El contador es manual: esta PWA no lee automáticamente el podómetro de Android. +1 XP por 1,000 pasos diarios registrados, con límite de 12 XP por día. Si una marcha incluye esos mismos pasos, evita registrarla dos veces para la XP.</div>
+    </div>
     <div class="card"><h2>⚙ Configura tu caminata</h2><p>La caminadora calcula una distancia aproximada con tu velocidad. Para exteriores puedes escribir la distancia real al terminar.</p>
       <label class="field-label" for="walkKind">Tipo de caminata</label><select class="field" id="walkKind"><option value="caminadora">Caminadora</option><option value="exterior">Al aire libre</option></select>
       <div class="small-field-grid three"><div><label class="field-label" for="walkSpeed">Velocidad (km/h)</label><input class="field" type="number" min="1" max="15" step="0.1" value="3.5" id="walkSpeed" inputmode="decimal"></div><div><label class="field-label" for="walkIncline">Inclinación (%)</label><input class="field" type="number" min="0" max="30" step="0.5" value="5" id="walkIncline" inputmode="decimal"></div><div><label class="field-label" for="walkGoal">Meta (minutos)</label><input class="field" type="number" min="5" max="240" step="5" value="30" id="walkGoal" inputmode="numeric"></div></div>
@@ -400,9 +444,10 @@
       <div class="companion-bonus" id="companionBonus" style="margin-top:11px">Tus avances físicos y mentales fortalecen este vínculo.</div>
     </div>
     <div class="dual-path-xp">
-      <div class="path-xp"><div class="path-top"><strong>⚔ Senda del Caballero</strong><span id="bodyXpText">0 XP</span></div><div class="xp-track"><div class="xp-fill body-fill" id="bodyXpFill"></div></div><small>Marchas y entrenamiento físico</small></div>
+      <div class="path-xp"><div class="path-top"><strong>⚔ Senda del Caballero</strong><span id="bodyXpText">0 XP</span></div><div class="xp-track"><div class="xp-fill body-fill" id="bodyXpFill"></div></div><small>Marchas, entrenamiento y pasos cotidianos</small></div>
       <div class="path-xp"><div class="path-top"><strong>☾ Senda del Ermitaño</strong><span id="mindXpText">0 XP</span></div><div class="xp-track"><div class="xp-fill mind-fill" id="mindXpFill"></div></div><small>Prácticas mentales + <span id="fastHeroXp">0 XP</span> de constancia del ayuno</small></div>
     </div>
+    <div class="steps-hero-summary" id="heroStepSummary">👣 Pasos cotidianos: 0 · +0 XP para el Caballero</div>
     <div class="stat-grid"><div class="stat"><strong id="heroKm">0.0</strong><span>Kilómetros</span></div><div class="stat"><strong id="heroWalks">0</strong><span>Marchas</span></div><div class="stat"><strong id="heroStrength">0</strong><span>Sesiones de fuerza</span></div></div>
     <div class="stat-grid"><div class="stat"><strong id="heroMindSessions">0</strong><span>Prácticas mentales</span></div><div class="stat"><strong id="heroMindMinutes">0</strong><span>Minutos de atención</span></div><div class="stat"><strong id="heroBooks">0</strong><span>Lecturas registradas</span></div></div>
     <div class="card"><h2>🏅 Distinciones ganadas</h2><p>Logros por participar y perseverar. No hay penalización por descansar ni obligación de mantener rachas.</p><div class="achievement-grid" id="heroAchievements"></div></div>
@@ -416,7 +461,7 @@
       <div class="small-info" id="weightTrendNote" style="margin-top:11px">Tu progreso se verá aquí. Las fluctuaciones diarias son normales; observa la tendencia a lo largo de semanas.</div>
       <div class="hr"></div><h2>Mis mediciones</h2><div id="weightEntries" aria-live="polite"><div class="weight-empty">Tu bitácora todavía espera el primer registro.</div></div>
     </div>
-    <div class="card"><h2>✧ Cómo se gana experiencia</h2><p>La senda física suma experiencia por marchas y fuerza; la mental, por lectura, meditación, estudio y por registrar ayunos con constancia (máximo 15 XP semanales). El peso suma una pequeña XP general. Completar una meta no premia ayunar más tiempo: 12 y 24 horas pueden dar exactamente la misma XP.</p></div>
+    <div class="card"><h2>✧ Cómo se gana experiencia</h2><p>La senda física suma experiencia por marchas, fuerza y pasos cotidianos; la mental, por lectura, meditación, estudio y por registrar ayunos con constancia (máximo 15 XP semanales). El peso suma una pequeña XP general. Completar una meta no premia ayunar más tiempo: 12 y 24 horas pueden dar exactamente la misma XP.</p></div>
     <h2 style="font-size:18px;margin:29px 0 7px">Crónicas de ayuno</h2><p class="section-note">Tu historial anterior sigue aquí, sin perder registros.</p><div class="stat-grid"><div class="stat"><strong id="totalFasts">0</strong><span>Ayunos guardados</span></div><div class="stat"><strong id="avgFast">—</strong><span>Promedio</span></div><div class="stat"><strong id="bestFast">—</strong><span>Más largo</span></div></div><h2 style="font-size:18px;margin:29px 0 7px">Mis sesiones</h2><div id="sessionsList"></div></section>
   <section class="view" id="page-ajustes" aria-label="Opciones de la aplicación"><div class="eyebrow">A TU MANERA</div><h1 class="page-title">La fuerza de<br><span class="highlight">tu palabra.</span></h1><p class="section-note">Elige el reto que quieres registrar y sigue tu camino con determinación.</p><div class="card"><h2>Meta de ayuno</h2><p>Elige tu objetivo. La constancia construye carácter; la prudencia protege tu camino.</p><div class="goal-choices" id="goalChoices"><button class="goal-btn" data-goal="12" type="button">12 h</button><button class="goal-btn" data-goal="14" type="button">14 h</button><button class="goal-btn" data-goal="16" type="button">16 h</button><button class="goal-btn" data-goal="18" type="button">18 h</button><button class="goal-btn" data-goal="20" type="button">20 h</button><button class="goal-btn" data-goal="22" type="button">22 h</button><button class="goal-btn" data-goal="24" type="button">24 h</button></div></div>
 <details class="care-details"><summary>ⓘ Información sobre el ayuno</summary><p>El ayuno es una herramienta opcional, no una prueba de valor. Si te encuentras físicamente mal, finaliza el ayuno y atiende tus necesidades; si los síntomas son intensos o persistentes, consulta a un profesional de salud. Metas largas no son necesarias para perder grasa.</p></details>
@@ -425,11 +470,11 @@
 
     <div class="card" id="notificationsSettings">
       <h2>🔔 Voces que llegan a ti</h2>
-      <p>Elige qué quieres escuchar. Son mensajes de ánimo, nunca órdenes de prolongar un ayuno. Los avisos se comprueban mientras Yuno está abierta y al regresar a ella.</p>
+      <p>Elige tus mensajes de ánimo. Silan y compañía celebran tu progreso con determinación. Los avisos se comprueban mientras Yuno está abierta y al regresar a ella.</p>
       <div class="notice-options">
-        <label class="notice-option"><input id="notifyDaily" type="checkbox" checked><span>Ánimo diario · 3 frases al azar<small>Una voz distinta puede encontrarte cada mañana, tarde y noche.</small></span></label>
-        <label class="notice-option"><input id="notifyMilestones" type="checkbox" checked><span>Objetivos alcanzados<small>Una felicitación breve cuando el contador cruce una marca de tu meta.</small></span></label>
-        <label class="notice-option"><input id="notifyJournal" type="checkbox" checked><span>Recordatorio del diario<small>Una invitación amable para escribir, salvo que ya hayas anotado algo ese día.</small></span></label>
+        <label class="notice-option"><input id="notifyDaily" type="checkbox" checked><span>Ánimo diario · 3 frases al azar<small>Una voz diferente puede inspirarte por la mañana, la tarde y la noche.</small></span></label>
+        <label class="notice-option"><input id="notifyMilestones" type="checkbox" checked><span>Objetivos alcanzados<small>Mensajes de orgullo y determinación en los hitos importantes, sin llenar tu barra de avisos.</small></span></label>
+        <label class="notice-option"><input id="notifyJournal" type="checkbox" checked><span>Recordatorio del diario<small>Un mensaje para anotar los logros que construiste ese día.</small></span></label>
         <label class="notice-option"><input id="notifyUpdates" type="checkbox" checked><span>Nueva versión disponible<small>Además del aviso dentro de Ajustes cuando exista una actualización.</small></span></label>
       </div>
       <label class="field-label">¿A qué horas quieres tus 3 mensajes?</label>
@@ -452,7 +497,7 @@
       <p class="install-note">Para instalarla en Android: abre su enlace HTTPS en Chrome → ⋮ → <b>Instalar aplicación</b> o <b>Añadir a pantalla principal</b>. Abre después el icono nuevo.</p>
       <p class="install-note">Tus datos antiguos del archivo HTML o APK no migran solos: usa <b>Respaldar</b> allí y <b>Restaurar</b> aquí. Los respaldos son privados: no los subas a GitHub.</p>
     </div>
-    <p class="footer">Hecha para acompañarte, no para exigirte.<br>Yuno · Versión 8.15 PWA · Sin anuncios · Modo sin conexión</p>
+    <p class="footer">Hecha para acompañarte, no para exigirte.<br>Yuno · Versión 8.16 PWA · Sin anuncios · Modo sin conexión</p>
   </section>
 </main>
 <div class="dialog-backdrop hidden" id="dialogOverlay"><section class="dialog" id="dialogBox" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" tabindex="-1"><div class="eyebrow" id="dialogEyebrow">UNA DECISIÓN TUYA</div><h2 id="dialogTitle">¿Cerrar este capítulo?</h2><p id="dialogDescription">Escucha la voz que cree en ti.</p><div id="dialogFastExtras" class="hidden"><div class="finish-context"><div class="finish-context-top"><span id="dialogStage">INICIO DEL CAMINO</span><span id="dialogElapsed">0 h de 16 h</span></div><div class="finish-bar"><div id="dialogProgress"></div></div></div><div id="dialogPersona">♡ LA COMPAÑERA</div><p class="finish-only-label">UN MENSAJE PARA ESTE MOMENTO</p><div id="dialogMotivation" class="finish-motivation" aria-live="polite"></div><button id="dialogAnother" type="button">✦ Otra voz para esta decisión</button></div><div id="dialogNoteWrap" class="hidden"><label class="field-label" for="dialogNote">¿Cómo quieres recordar este momento? (opcional)</label><textarea id="dialogNote" class="field" maxlength="1200" placeholder="Hoy elegí cuidarme. Me sentí... "></textarea></div><button type="button" id="dialogStay" class="secondary stay hidden">♡ Me siento bien, quiero continuar</button><div class="dialog-buttons"><button type="button" class="secondary" id="dialogCancel">Volver</button><button type="button" class="action" id="dialogAccept">Confirmar</button></div></section></div>
@@ -499,7 +544,7 @@
 (()=>{'use strict';
 const KEY='levantate_ayuno_v1', CIRC=2*Math.PI*112, $=id=>document.getElementById(id);
 const defaultNotifications=()=>({daily:true,milestones:true,journal:true,updates:true,dailyTimes:['09:00','14:00','19:00'],journalTime:'21:00',sent:{},lastMessage:null});
-const initial=()=>({goal:16,start:null,activeFastGoal:null,sessions:[],entries:[],workouts:[],mindRecords:[],weights:[],companionVoice:"espada",companionLast:null,companionMood:"serena",companionMoods:null,companionShownLevel:null,mindActive:null,walk:null,walkPrefs:{kind:"caminadora",speed:3.5,incline:5,goal:30},restEnd:null,quote:0,lastQuote:null,voice:"todas",oath:"",notifications:defaultNotifications()});
+const initial=()=>({goal:16,start:null,activeFastGoal:null,sessions:[],entries:[],workouts:[],mindRecords:[],weights:[],stepLogs:[],stepsGoal:10000,companionVoice:"espada",companionLast:null,companionMood:"serena",companionMoods:null,companionShownLevel:null,mindActive:null,walk:null,walkPrefs:{kind:"caminadora",speed:3.5,incline:5,goal:30},restEnd:null,quote:0,lastQuote:null,voice:"todas",oath:"",notifications:defaultNotifications()});
 let db;try{db=Object.assign(initial(),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){db=initial()}
 if(![12,14,16,18,20,22,24].includes(Number(db.goal)))db.goal=16;
 if(!Array.isArray(db.entries))db.entries=[];
@@ -508,6 +553,8 @@ if(![12,14,16,18,20,22,24].includes(Number(db.activeFastGoal)))db.activeFastGoal
 if(!Array.isArray(db.workouts))db.workouts=[];
 if(!Array.isArray(db.mindRecords))db.mindRecords=[];
 if(!Array.isArray(db.weights))db.weights=[];
+if(!Array.isArray(db.stepLogs))db.stepLogs=[];
+if(![3000,5000,7500,10000,12000,15000].includes(Number(db.stepsGoal)))db.stepsGoal=10000;
 if(!["compa","princesa","espada"].includes(db.companionVoice))db.companionVoice="espada";
 if(typeof db.companionMood!=="string")db.companionMood="serena";
 if(!db.companionMoods||typeof db.companionMoods!=="object"||Array.isArray(db.companionMoods))db.companionMoods={};
@@ -710,7 +757,7 @@ function tick(){const now=Date.now(),active=!!db.start,elapsed=active?Math.max(0
  document.querySelectorAll('#milestoneMarks [data-hour]').forEach(e=>{const h=Number(e.getAttribute('data-hour'));e.classList.toggle('done',past.includes(h));e.classList.toggle('next',active&&h===next)})
 }
 
-function switchPage(page){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='page-'+page));document.querySelectorAll('.tab').forEach(e=>{let on=e.dataset.page===page;e.classList.toggle('active',on);e.setAttribute('aria-current',on?'page':'false')});if(page==='diario')renderEntries();if(page==='historia'){renderSessions();renderHero()}if(page==='marcha'){renderWalk();renderWorkouts()}if(page==='mente'){renderMind();renderMindRecords()}if(page==='ajustes'){renderGoals();$('oathText').value=db.oath;}window.scrollTo({top:0,behavior:'smooth'})}
+function switchPage(page){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('active',e.id==='page-'+page));document.querySelectorAll('.tab').forEach(e=>{let on=e.dataset.page===page;e.classList.toggle('active',on);e.setAttribute('aria-current',on?'page':'false')});if(page==='diario')renderEntries();if(page==='historia'){renderSessions();renderHero()}if(page==='marcha'){renderWalk();renderWorkouts();renderSteps()}if(page==='mente'){renderMind();renderMindRecords()}if(page==='ajustes'){renderGoals();$('oathText').value=db.oath;}window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.page)));document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>switchPage(b.dataset.go)));
 $('openJournal').addEventListener('click',()=>switchPage('diario'));$('journalShortcut').addEventListener('click',()=>switchPage('diario'));
 $('toggleFast').addEventListener('click',()=>{
@@ -913,14 +960,15 @@ $('mindType').addEventListener('change',mindMotivation);
 $('mindRecords').addEventListener('click',e=>{const b=e.target.closest('[data-delete-mind]');if(!b)return;ask({title:'¿Eliminar esta crónica?',description:'También se recalculará la experiencia mental.',actionLabel:'Eliminar',onConfirm:()=>{db.mindRecords=db.mindRecords.filter(r=>String(r.id)!==b.dataset.deleteMind);save();renderMindRecords();renderHero()}})});
 
 function renderHero(){
- const ws=db.workouts,walks=ws.filter(x=>x.type==='walk'),strength=ws.filter(x=>x.type==='strength'),km=walks.reduce((a,b)=>a+finite(b.km,0),0),bodyXp=ws.reduce((a,b)=>a+workoutXp(b),0),mindActivitiesXp=db.mindRecords.reduce((a,b)=>a+Math.max(0,finite(b.xp,0)),0),fastXp=fastingProgressXP().xp,mindXp=mindActivitiesXp+fastXp,weightXp=weightProgressXP().xp,xp=bodyXp+mindXp+weightXp;
+ const ws=db.workouts,walks=ws.filter(x=>x.type==='walk'),strength=ws.filter(x=>x.type==='strength'),km=walks.reduce((a,b)=>a+finite(b.km,0),0),bodyXp=ws.reduce((a,b)=>a+workoutXp(b),0)+stepsProgressXP(),mindActivitiesXp=db.mindRecords.reduce((a,b)=>a+Math.max(0,finite(b.xp,0)),0),fastXp=fastingProgressXP().xp,mindXp=mindActivitiesXp+fastXp,weightXp=weightProgressXP().xp,xp=bodyXp+mindXp+weightXp;
  let lvl=1;while(lvl<100 && xp>=xpThreshold(lvl+1))lvl++;
  let bottom=xpThreshold(lvl),top=xpThreshold(lvl+1),progress=100*clamp((xp-bottom)/(top-bottom),0,1),rank=heroTitles.filter(x=>lvl>=x.min).at(-1);
  const pathLevel=n=>{let level=1;while(level<100&&n>=xpThreshold(level+1))level++;const low=xpThreshold(level),high=xpThreshold(level+1);return {level,progress:clamp((n-low)/Math.max(1,high-low),0,1)*100}};
  const physicalPath=pathLevel(bodyXp),mentalPath=pathLevel(mindXp);
  $('bodyXpText').textContent='NIVEL '+physicalPath.level+' · '+bodyXp+' XP';$('mindXpText').textContent='NIVEL '+mentalPath.level+' · '+mindXp+' XP';$('bodyXpFill').style.width=physicalPath.progress+'%';$('mindXpFill').style.width=mentalPath.progress+'%';$('fastHeroXp').textContent=fastXp+' XP';$('heroMindSessions').textContent=db.mindRecords.length;$('heroMindMinutes').textContent=Math.round(db.mindRecords.reduce((sum,r)=>sum+finite(r.minutes,0),0));$('heroBooks').textContent=db.mindRecords.filter(r=>r.type==='leer').length;
+ $('heroStepSummary').textContent='👣 Pasos cotidianos: '+stepsFormatter.format(db.stepLogs.reduce((a,r)=>a+r.steps,0))+' · +'+stepsProgressXP()+' XP para el Caballero';
  $('heroAvatar').dataset.tier=String(lvl>=10?4:lvl>=7?3:lvl>=4?2:1);$('heroLevel').textContent='NIVEL '+lvl;$('heroRank').textContent=rank.title;$('heroXpLabel').textContent=xp+' XP totales';$('heroNextXp').textContent=(top-xp)+' XP para nivel '+(lvl+1);$('heroXpFill').style.width=progress+'%';$('heroKm').textContent=km.toFixed(1);$('heroWalks').textContent=walks.length;$('heroStrength').textContent=strength.length;
- const medals=[['Primer paso',walks.length>=1,'Completa tu primera caminata.'],['Pies en marcha',walks.length>=5,'Guarda cinco caminatas.'],['Viajero',km>=10,'Acumula diez kilómetros.'],['Horizonte lejano',km>=50,'Acumula cincuenta kilómetros.'],['Primer entrenamiento',strength.length>=1,'Registra una sesión de fuerza.'],['Forjado con paciencia',strength.length>=10,'Registra diez sesiones de fuerza.'],['Lector del alba',db.mindRecords.some(x=>x.type==='leer'),'Registra una lectura.'],['La primera calma',db.mindRecords.some(x=>x.type==='meditar'),'Registra una meditación.'],['Buscador de respuestas',db.mindRecords.filter(x=>x.type==='estudiar').length>=3,'Registra tres sesiones de estudio.'],['El oído del viajero',db.mindRecords.some(x=>x.type==='musica'),'Escucha música con atención.'],['Cronista del cambio',db.weights.length>=1,'Anota tu primera medición de peso.'],['Cartógrafo constante',weightProgressXP().checkins>=4,'Registra tu peso durante cuatro semanas diferentes.'],['Crónicas de voluntad',fastingProgressXP().weeks>=1,'Registra tu primera semana de ayuno.'],['Bitácora del Ermitaño',fastingProgressXP().weeks>=4,'Registra ayunos en cuatro semanas diferentes.']];
+ const medals=[['Primer paso',walks.length>=1,'Completa tu primera caminata.'],['Huellas del campus',db.stepLogs.some(s=>s.steps>=5000),'Registra 5,000 pasos en un día.'],['Caminante de los diez mil',db.stepLogs.some(s=>s.steps>=10000),'Registra 10,000 pasos en un día.'],['Pies en marcha',walks.length>=5,'Guarda cinco caminatas.'],['Viajero',km>=10,'Acumula diez kilómetros.'],['Horizonte lejano',km>=50,'Acumula cincuenta kilómetros.'],['Primer entrenamiento',strength.length>=1,'Registra una sesión de fuerza.'],['Forjado con paciencia',strength.length>=10,'Registra diez sesiones de fuerza.'],['Lector del alba',db.mindRecords.some(x=>x.type==='leer'),'Registra una lectura.'],['La primera calma',db.mindRecords.some(x=>x.type==='meditar'),'Registra una meditación.'],['Buscador de respuestas',db.mindRecords.filter(x=>x.type==='estudiar').length>=3,'Registra tres sesiones de estudio.'],['El oído del viajero',db.mindRecords.some(x=>x.type==='musica'),'Escucha música con atención.'],['Cronista del cambio',db.weights.length>=1,'Anota tu primera medición de peso.'],['Cartógrafo constante',weightProgressXP().checkins>=4,'Registra tu peso durante cuatro semanas diferentes.'],['Crónicas de voluntad',fastingProgressXP().weeks>=1,'Registra tu primera semana de ayuno.'],['Bitácora del Ermitaño',fastingProgressXP().weeks>=4,'Registra ayunos en cuatro semanas diferentes.']];
  $('heroAchievements').innerHTML=medals.map(([name,done,desc])=>`<div class="achievement ${done?'':'locked'}"><strong>${done?'✦':'◇'} ${name}</strong><small>${done?'¡Distinción conseguida!':desc}</small></div>`).join('');
  renderCompanion();renderWeights();
 }
@@ -1184,14 +1232,91 @@ $('weightSave').addEventListener('click',()=>{
 });
 $('weightEntries').addEventListener('click',e=>{const btn=e.target.closest('[data-weight-delete]');if(!btn)return;const date=btn.dataset.weightDelete;ask({title:'¿Eliminar esta medición?',description:'Se borrará solo el registro de peso del '+date+'.',actionLabel:'Eliminar',onConfirm:()=>{db.weights=db.weights.filter(w=>w.date!==date);save();renderHero();notice('Medición eliminada. XP recalculada.')}})});
 
+
+// Yuno 8.16 — Registro manual de pasos del campus y trayectos cotidianos.
+const stepsFormatter=new Intl.NumberFormat('es-MX');
+function normalizeStepLogs(logs){
+ if(!Array.isArray(logs))return [];
+ const unique=new Map();
+ for(const row of logs){
+  if(!row||typeof row.date!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(row.date))continue;
+  const d=new Date(row.date+'T12:00:00');
+  if(!Number.isFinite(d.getTime())||notificationDateKey(d)!==row.date||row.date>localToday())continue;
+  const n=Number(row.steps);
+  if(!Number.isInteger(n)||n<0||n>100000)continue;
+  unique.set(row.date,{date:row.date,steps:n});
+ }
+ return [...unique.values()].sort((a,b)=>a.date.localeCompare(b.date));
+}
+db.stepLogs=normalizeStepLogs(db.stepLogs);
+function stepsProgressXP(){return db.stepLogs.reduce((xp,row)=>xp+Math.min(12,Math.floor(row.steps/1000)),0)}
+function recordStepValue(date,number,mode){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||date>localToday()||date<'2020-01-01'){notice('Elige una fecha válida, de hoy o anterior.');return}
+ if(!Number.isInteger(number)||number<0||number>100000){notice('Escribe un número entero de pasos entre 0 y 100,000.');return}
+ const found=db.stepLogs.find(row=>row.date===date);const current=found?.steps||0;
+ const value=mode==='set'?number:current+number;
+ if(value>100000){notice('Para evitar errores, el límite es 100,000 pasos por día.');return}
+ const before=stepsProgressXP();
+ db.stepLogs=normalizeStepLogs([...db.stepLogs.filter(row=>row.date!==date),{date,steps:value}]);
+ save();renderSteps();renderHero();
+ const gained=stepsProgressXP()-before;
+ notice(gained>0?`¡Bien hecho, caballero! ${stepsFormatter.format(value)} pasos registrados · +${gained} XP ⚔`:`¡${stepsFormatter.format(value)} pasos registrados! Cada recorrido tiene su historia. 👣`);
+}
+function stepsQuote(n,goal){
+ const stage=n>=goal?'goal':n>=Math.min(goal,7500)?'near':n>=5000?'middle':n>=2000?'start':'begin';
+ const lines={
+  begin:['Silan: «El camino no exige testigos, portador. Lo escribes con cada huella».','Princesa: «Me fascina pensar en las aventuras que te esperan incluso camino a clase».'],
+  start:['Compañera: «¡Mira nada más, caballero! ¡La universidad también se convirtió en tu mapa de aventuras!».','Silan: «Dos mil pasos no son poca cosa cuando los has recorrido tú. Buen inicio».'],
+  middle:['Princesa: «Tu día ya tiene kilómetros de historias. Qué orgullo verte siempre en movimiento».','Silan: «No todas las marchas llevan una bandera. También se avanza cruzando la ciudad».'],
+  near:['Compañera: «¡Esos zapatos ya merecen su propia leyenda! ¡Qué buena marcha!».','Princesa: «Desde la primera puerta hasta esta última huella, has seguido construyendo tu camino».'],
+  goal:['Silan: «Has alcanzado tu referencia, mi caballero. Recibe esta victoria con la frente en alto».','Compañera: «¡Objetivo de pasos alcanzado! ¡Y todavía te quedan historias por contar!».']
+ };
+ const pool=lines[stage];const seed=(new Date().getDate() + Math.floor(n/1000))%pool.length;return pool[seed].replace(/»\.$/,'»');
+}
+function renderSteps(){
+ const today=localToday(),input=$('stepsDate');input.max=today;
+ if(!input.value||input.value>today)input.value=today;
+ const day=input.value,record=db.stepLogs.find(r=>r.date===day),value=record?.steps||0;
+ const goal=db.stepsGoal,percent=Math.min(100,Math.round(100*value/goal));
+ $('stepsToday').textContent=stepsFormatter.format(value);
+ $('stepsProgress').style.width=percent+'%';
+ $('stepsGoalRead').textContent=(day===today?'Hoy':'El '+day)+': '+percent+' % de tu referencia de '+stepsFormatter.format(goal)+' pasos';
+ const since=new Date();since.setHours(0,0,0,0);since.setDate(since.getDate()-6);
+ $('stepsWeek').textContent=stepsFormatter.format(db.stepLogs.filter(r=>new Date(r.date+'T12:00:00')>=since).reduce((a,r)=>a+r.steps,0));
+ $('stepsTotal').textContent=stepsFormatter.format(db.stepLogs.reduce((a,r)=>a+r.steps,0));
+ $('stepsXp').textContent=stepsProgressXP()+' XP';
+ $('stepsMotivation').textContent=stepsQuote(value,goal);
+ $('stepsDailyGoal').value=String(goal);
+ $('stepsHistory').innerHTML=db.stepLogs.length?db.stepLogs.slice().reverse().slice(0,25).map(r=>`<div class="steps-row"><div><strong>${stepsFormatter.format(r.steps)} pasos</strong><div class="small-info">${r.date} · +${Math.min(12,Math.floor(r.steps/1000))} XP</div></div><button type="button" data-steps-delete="${r.date}" aria-label="Eliminar pasos del ${r.date}">Eliminar</button></div>`).join(''):'<div class="small-info" style="padding:10px 0">La primera huella de tu bitácora está por escribirse. 👣</div>';
+}
+$('stepsDate').value=localToday();$('stepsDate').max=localToday();
+$('stepsDate').addEventListener('change',renderSteps);
+$('stepsDailyGoal').addEventListener('change',e=>{db.stepsGoal=Number(e.target.value)||10000;save();renderSteps();notice('¡Referencia actualizada! Tu camino, tus decisiones. ⚔')});
+document.querySelectorAll('[data-add-steps]').forEach(b=>b.addEventListener('click',()=>recordStepValue($('stepsDate').value,Number(b.dataset.addSteps),'add')));
+$('stepsAdd').addEventListener('click',()=>{
+ const raw=$('stepsInput').value.trim(),n=Number(raw);
+ if(!raw||!Number.isInteger(n)||n<=0){notice('Escribe una cantidad de pasos mayor que cero.');return}
+ recordStepValue($('stepsDate').value,n,'add');$('stepsInput').value='';
+});
+$('stepsSet').addEventListener('click',()=>{
+ const raw=$('stepsInput').value.trim(),n=Number(raw);
+ if(!raw||!Number.isInteger(n)||n<0){notice('Escribe un total válido de pasos.');return}
+ recordStepValue($('stepsDate').value,n,'set');$('stepsInput').value='';
+});
+$('stepsHistory').addEventListener('click',e=>{
+ const b=e.target.closest('[data-steps-delete]');if(!b)return;
+ const date=b.dataset.stepsDelete;
+ ask({title:'¿Eliminar los pasos de ese día?',description:'El registro del '+date+' se eliminará y la XP se recalculará.',actionLabel:'Eliminar registro',onConfirm:()=>{db.stepLogs=db.stepLogs.filter(r=>r.date!==date);save();renderSteps();renderHero();notice('Registro eliminado. Tu bitácora está actualizada.')}});
+});
+
 refreshWalkPrefs();
 function sendBackup(){const data=JSON.stringify({app:'Yuno',version:3,data:db},null,2);if(window.AndroidBridge&&typeof window.AndroidBridge.saveBackup==='function'){window.AndroidBridge.saveBackup(data);return}const blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='yuno-respaldo-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);notice('Respaldo generado. Consérvalo en un lugar seguro.')}
 $('exportData').addEventListener('click',sendBackup);
 $('importButton').addEventListener('click',()=>$('importData').click());
-$('importData').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const parsed=JSON.parse(await f.text()),d=parsed.data;if(!['Levantate','Yuno','Yuno'].includes(parsed.app)||!d||!Array.isArray(d.entries)||!Array.isArray(d.sessions))throw Error('Formato no reconocido');ask({title:'¿Restaurar este respaldo?',description:'Esto reemplazará tus ayunos y notas actuales. Guarda un respaldo antes si quieres conservarlos.',actionLabel:'Restaurar datos',onConfirm:()=>{db=Object.assign(initial(),d);db.workouts=Array.isArray(db.workouts)?db.workouts:[];db.mindRecords=Array.isArray(db.mindRecords)?db.mindRecords:[];db.weights=normalizedWeights(db.weights);db.companionVoice=['compa','princesa','espada'].includes(db.companionVoice)?db.companionVoice:'compa';db.companionMoods=db.companionMoods&&typeof db.companionMoods==='object'&&!Array.isArray(db.companionMoods)?db.companionMoods:{};for(const v of ['espada','princesa','compa'])if(typeof db.companionMoods[v]!=='string')db.companionMoods[v]=(v==='espada'&&typeof db.companionMood==='string'?db.companionMood:'serena');db.companionLast=null;db.companionShownLevel=null;db.mindActive=db.mindActive&&typeof db.mindActive==='object'?db.mindActive:null;db.walk=db.walk&&typeof db.walk==='object'?db.walk:null;db.walkPrefs=db.walkPrefs&&typeof db.walkPrefs==='object'?db.walkPrefs:initial().walkPrefs;db.restEnd=Number.isFinite(Number(db.restEnd))&&db.restEnd>Date.now()?db.restEnd:null;db.goal=[12,14,16,18,20,22,24].includes(Number(db.goal))?Number(db.goal):16;db.start=Number(db.start)>0&&Number(db.start)<=Date.now()?Number(db.start):null;db.activeFastGoal=[12,14,16,18,20,22,24].includes(Number(db.activeFastGoal))?Number(db.activeFastGoal):null;db.voice=['todas','compa','princesa','guerrera','espada','sombra','estratega','viajero','renacer','ermitaño'].includes(db.voice)?db.voice:'todas';db.oath=typeof db.oath==='string'?db.oath:'';normalizeNotifications();refreshWalkPrefs();save();tick();renderQuote();renderGoals();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderMind();renderMindRecords();renderNotificationSettings();$('oathText').value=db.oath;notice('Respaldo restaurado correctamente.')}})}catch(err){notice('No se pudo leer ese respaldo.')}finally{e.target.value=''}});
-$('resetData').addEventListener('click',()=>ask({title:'¿Borrar toda tu historia guardada?',description:'Se eliminarán todos los ayunos, notas y tu juramento. Esta acción no se puede deshacer sin un respaldo.',actionLabel:'Sí, borrar todo',onConfirm:()=>{db=initial();refreshWalkPrefs();save();tick();renderQuote();renderGoals();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderMind();renderMindRecords();renderNotificationSettings();$('oathText').value='';notice('Tus datos se borraron. Puedes empezar a tu ritmo.');switchPage('hoy')}}));
+$('importData').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const parsed=JSON.parse(await f.text()),d=parsed.data;if(!['Levantate','Yuno','Yuno'].includes(parsed.app)||!d||!Array.isArray(d.entries)||!Array.isArray(d.sessions))throw Error('Formato no reconocido');ask({title:'¿Restaurar este respaldo?',description:'Esto reemplazará tus ayunos y notas actuales. Guarda un respaldo antes si quieres conservarlos.',actionLabel:'Restaurar datos',onConfirm:()=>{db=Object.assign(initial(),d);db.workouts=Array.isArray(db.workouts)?db.workouts:[];db.mindRecords=Array.isArray(db.mindRecords)?db.mindRecords:[];db.weights=normalizedWeights(db.weights);db.stepLogs=normalizeStepLogs(db.stepLogs);db.stepsGoal=[3000,5000,7500,10000,12000,15000].includes(Number(db.stepsGoal))?Number(db.stepsGoal):10000;db.companionVoice=['compa','princesa','espada'].includes(db.companionVoice)?db.companionVoice:'compa';db.companionMoods=db.companionMoods&&typeof db.companionMoods==='object'&&!Array.isArray(db.companionMoods)?db.companionMoods:{};for(const v of ['espada','princesa','compa'])if(typeof db.companionMoods[v]!=='string')db.companionMoods[v]=(v==='espada'&&typeof db.companionMood==='string'?db.companionMood:'serena');db.companionLast=null;db.companionShownLevel=null;db.mindActive=db.mindActive&&typeof db.mindActive==='object'?db.mindActive:null;db.walk=db.walk&&typeof db.walk==='object'?db.walk:null;db.walkPrefs=db.walkPrefs&&typeof db.walkPrefs==='object'?db.walkPrefs:initial().walkPrefs;db.restEnd=Number.isFinite(Number(db.restEnd))&&db.restEnd>Date.now()?db.restEnd:null;db.goal=[12,14,16,18,20,22,24].includes(Number(db.goal))?Number(db.goal):16;db.start=Number(db.start)>0&&Number(db.start)<=Date.now()?Number(db.start):null;db.activeFastGoal=[12,14,16,18,20,22,24].includes(Number(db.activeFastGoal))?Number(db.activeFastGoal):null;db.voice=['todas','compa','princesa','guerrera','espada','sombra','estratega','viajero','renacer','ermitaño'].includes(db.voice)?db.voice:'todas';db.oath=typeof db.oath==='string'?db.oath:'';normalizeNotifications();refreshWalkPrefs();save();tick();renderQuote();renderGoals();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderSteps();renderMind();renderMindRecords();renderNotificationSettings();$('oathText').value=db.oath;notice('Respaldo restaurado correctamente.')}})}catch(err){notice('No se pudo leer ese respaldo.')}finally{e.target.value=''}});
+$('resetData').addEventListener('click',()=>ask({title:'¿Borrar toda tu historia guardada?',description:'Se eliminarán todos los ayunos, notas y tu juramento. Esta acción no se puede deshacer sin un respaldo.',actionLabel:'Sí, borrar todo',onConfirm:()=>{db=initial();refreshWalkPrefs();save();tick();renderQuote();renderGoals();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderSteps();renderMind();renderMindRecords();renderNotificationSettings();$('oathText').value='';notice('Tus datos se borraron. Puedes empezar a tu ritmo.');switchPage('hoy')}}));
 $('dayText').textContent=new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long'}).toUpperCase();
-renderQuote();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderMind();renderMindRecords();mindMotivation();renderGoals();$('oathText').value=db.oath;tick();setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
+renderQuote();renderEntries();renderSessions();renderWorkouts();renderHero();renderWalk();renderSteps();renderMind();renderMindRecords();mindMotivation();renderGoals();$('oathText').value=db.oath;tick();setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
 
 // Yuno 8.7 — Conversaciones originales de apoyo. Separadas del registro de ayunos y de la XP.
 // Los diálogos son solo texto: las tres compañeras te acompañan sin audio.
@@ -1268,6 +1393,38 @@ async function showFriendlyNotification(title,body,tag){
  if(!('Notification' in window)||Notification.permission!=='granted'||!('serviceWorker' in navigator)||!isOnlinePwa)return false;
  try{const reg=await navigator.serviceWorker.ready;await reg.showNotification(title,{body,tag,icon:'./icon-192.png',badge:'./icon-96.png',data:{url:new URL('./',location.href).href},renotify:false});return true}catch(e){console.warn('Aviso no entregado:',e);return false}
 }
+
+const yunoPositiveNotices=[
+ ['espada','Portador, endereza la mirada. Hoy también estás forjando una historia digna de contarse.'],
+ ['espada','Mi caballero, la determinación también vive en las pequeñas decisiones. Mira cuánto has construido.'],
+ ['espada','No naciste para medir tu valor por una derrota. ¡Que tu voluntad recuerde su nombre!'],
+ ['espada','Tu espada sigue aquí. Si hoy avanzaste un paso, hay una victoria que merece reconocerse.'],
+ ['princesa','Mi querido caballero, hay una luz especial en quien sigue buscando su camino. Yo la veo en ti.'],
+ ['princesa','Hoy quiero verte levantar la cabeza con orgullo. Has escrito otro hermoso capítulo.'],
+ ['princesa','Ningún reino podría comprar tu curiosidad, tu coraje y ese corazón que no se rinde fácilmente.'],
+ ['princesa','¡Mi héroe! Los castillos se construyen piedra a piedra, como tu historia. Y qué hermosa está quedando.'],
+ ['compa','¡ATENCIÓN! ¡Nuestro protagonista está acumulando victorias y ni siquiera se ha dado cuenta!'],
+ ['compa','¡Vamos, caballero! Que los tropiezos no tapen todas esas aventuras que ya has vivido.'],
+ ['compa','¡Si hoy diste una caminata, aprendiste algo o hiciste reír a alguien, ya tienes una historia genial!'],
+ ['compa','¡Te conozco! Cuando decides construir algo, encuentras la manera. ¡Esa chispa es increíble!']
+];
+function nextPositiveNotice(){
+ const n=db.notifications,exclude=n.lastPositiveNotice,choices=yunoPositiveNotices.map((v,i)=>({key:v[0],txt:v[1],id:i})).filter(v=>v.id!==exclude);
+ const picked=choices[Math.floor(Math.random()*choices.length)];n.lastPositiveNotice=picked.id;return picked;
+}
+function meaningfulFastingMilestones(goal){return [...new Set([8,12,16,20,goal].filter(h=>h<=goal&&h>0))].sort((a,b)=>a-b)}
+function milestoneEncouragement(h,goal){
+ if(h>=goal){
+  const pool=[['espada',`¡${h} horas, portador! Has cumplido la meta elegida. ¡Victoria conquistada!`],['princesa',`¡Misión cumplida, mi caballero! ${h} horas de historia y una meta alcanzada. Qué orgullo.`],['compa',`¡LO LOGRASTE! ¡${h} horas y objetivo cumplido! ¡Que suene la música de victoria!`]];
+  const [key,txt]=pool[Math.floor(Math.random()*pool.length)];return {title:'Yuno · ¡Objetivo conquistado!',body:txt};
+ }
+ const pool=[
+  ['espada',`¡${h} horas, portador! Ya hay un camino sólido detrás de ti. Tu constancia habla por sí misma.`],
+  ['princesa',`¡${h} horas, mi caballero! Me encanta ver cómo escribes otra página de tu propósito. ¡Qué bien vas!`],
+  ['compa',`¡${h} horas! ¡El protagonista avanza y el castillo está cada vez más cerca! ¡Arriba ese ánimo!`]
+ ];
+ const [key,txt]=pool[Math.floor(Math.random()*pool.length)];return {title:'Yuno · '+voices[key].name+' · '+h+' h',body:txt};
+}
 function nextRandomNotificationQuote(){
  const pool=allQuotes.length>1?allQuotes.filter(q=>q.id!==db.notifications.lastMessage):allQuotes;
  const found=pool[Math.floor(Math.random()*pool.length)];
@@ -1284,7 +1441,7 @@ $('enableNotifications').addEventListener('click',async()=>{
 });
 $('testNotifications').addEventListener('click',async()=>{
  if(!('Notification' in window)||Notification.permission!=='granted'){notice('Primero toca «Activar avisos».');return}
- const q=nextRandomNotificationQuote();save();
+ const q=nextPositiveNotice();save();
  if(await showFriendlyNotification('Yuno · '+voices[q.key].name,q.txt,'levantate-test-'+Date.now()))notice('Mensaje de prueba enviado. Revisa las notificaciones del teléfono.');
  else notice('No se pudo enviar el aviso. Comprueba permisos e instalación.');
 });
@@ -1297,9 +1454,9 @@ async function checkScheduledNotifications(){
    for(const [key,when] of Object.entries(sent)){if(!Number.isFinite(Number(when))||time-Number(when)>30*86400000)delete sent[key]}
    const due=[];
    const collect=(key,at,title,body)=>{if(sent[key]||time<at)return;sent[key]=time;if(time-at<=20*60000)due.push({at,title,body,key})};
-   if(n.daily){n.dailyTimes.forEach((t,i)=>{const at=scheduledAtToday(t,now);if(time<at)return;const q=nextRandomNotificationQuote();collect(`daily:${day}:${i}:${t}`,at,`Yuno · ${voices[q.key].name}`,q.txt)})}
-   if(n.journal){const recordedToday=db.entries.some(e=>notificationDateKey(new Date(e.date))===day);const at=scheduledAtToday(n.journalTime,now);if(recordedToday&&time>=at)sent[`journal:${day}:${n.journalTime}`]=time;else collect(`journal:${day}:${n.journalTime}`,at,'Yuno · Tu diario','Si te apetece, guarda una pequeña victoria o cómo te sentiste hoy. Sin obligaciones.')}
-   if(n.milestones&&db.start){for(const h of milestoneHours(db.goal)){const at=db.start+h*3600000;collect(`milestone:${db.start}:${h}`,at,`Yuno · ${h} horas`,'Has alcanzado una referencia de tu camino. Puedes terminar aquí; tu bienestar va primero.') }}
+   if(n.daily){n.dailyTimes.forEach((t,i)=>{const at=scheduledAtToday(t,now);if(time<at)return;const q=nextPositiveNotice();collect(`daily:${day}:${i}:${t}`,at,`Yuno · ${voices[q.key].name}`,q.txt)})}
+   if(n.journal){const recordedToday=db.entries.some(e=>notificationDateKey(new Date(e.date))===day);const at=scheduledAtToday(n.journalTime,now);if(recordedToday&&time>=at)sent[`journal:${day}:${n.journalTime}`]=time;else collect(`journal:${day}:${n.journalTime}`,at,'Yuno · Tu diario','¡Otro capítulo terminado! Escribe la victoria, la risa o el descubrimiento que quieras recordar de hoy.')}
+   if(n.milestones&&db.start){for(const h of meaningfulFastingMilestones(db.activeFastGoal||db.goal)){const at=db.start+h*3600000,msg=milestoneEncouragement(h,db.activeFastGoal||db.goal);collect(`milestone:${db.start}:${h}`,at,msg.title,msg.body) }}
    if(due.length){const latest=due.sort((a,b)=>b.at-a.at)[0];await showFriendlyNotification(latest.title,latest.body,latest.key)}
    save();
  }finally{notificationCheckBusy=false}

@@ -1,8 +1,9 @@
-Yuno 8.15 — Conversaciones vivas
+YUNO 8.16 · versión completa
 
-Primero respalda tus datos desde Ajustes → Respaldar.
-Descomprime la actualización ligera. En GitHub, en el mismo repositorio de siempre, reemplaza index.html y sw.js en la raíz y confirma los cambios.
-Después de que GitHub Pages publique la actualización, abre Yuno → Ajustes → Buscar actualizaciones.
+1. Haz un respaldo desde Ajustes → Respaldar en la app instalada.
+2. Subir TODOS los archivos de esta carpeta a https://github.com/CIzanami-crypto/levantate/upload/main
+3. Confirmar Commit changes.
+4. Cuando termine GitHub Pages, abrir Yuno → Ajustes → Buscar actualizaciones.
 
-Novedad: más escenas originales, cambios de expresión según el diálogo y selección sin revelar cuántos quedan.
-Se conservaron las seis pestañas y el mapa educativo. No subas tu respaldo personal a GitHub.
+Los registros de pasos se guardan localmente y viajan en el archivo de respaldo.
+No subas tus respaldos personales a GitHub.
