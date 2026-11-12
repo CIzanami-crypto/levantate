@@ -1,9 +1,12 @@
-YUNO 8.16 · versión completa
+YUNO 8.19 — PALABRAS DE SILEAN
 
-1. Haz un respaldo desde Ajustes → Respaldar en la app instalada.
-2. Subir TODOS los archivos de esta carpeta a https://github.com/CIzanami-crypto/levantate/upload/main
-3. Confirmar Commit changes.
-4. Cuando termine GitHub Pages, abrir Yuno → Ajustes → Buscar actualizaciones.
+Esta versión completa amplía los diálogos de «Levántame» en Solo Silean, con nuevas emociones, palabras breves, mensajes en ayuno avanzado y felicitaciones al alcanzar la meta. El diálogo y las expresiones cambian sin repetir escenas consecutivas. Se conserva la ilustración del juramento y la opción de las tres compañeras. Sin reproductor de voz.
 
-Los registros de pasos se guardan localmente y viajan en el archivo de respaldo.
-No subas tus respaldos personales a GitHub.
+1. Haz respaldo en Ajustes de Yuno.
+2. Descomprime este ZIP.
+3. Sube los archivos EXTRAÍDOS a la raíz del repositorio:
+https://github.com/CIzanami-crypto/levantate/upload/main
+4. Pulsa Commit changes y espera la publicación de GitHub Pages.
+5. Abre Yuno y pulsa Buscar actualizaciones.
+
+No subas el respaldo personal a GitHub ni borres los datos de la aplicación.
